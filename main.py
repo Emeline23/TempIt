@@ -1,9 +1,13 @@
 def User():
     pass
 
+def Degreed():
+    pass
+
 
 def main():
     pass
+
 
 
 # Press the green button in the gutter to run the script.
