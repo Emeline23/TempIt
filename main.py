@@ -1,24 +1,14 @@
-import csv
+from temperatures import TemperatureStatistics
 
 
 def main():
+    city1 = TemperatureStatistics()
 
-    with open("ljusnedal_date_time.csv", "r") as file:
-        text = csv.reader(file)
+    result = city1.avg_temp()
 
-        next(text)
-
-        for line in text:
-            split_line = line[0].split(";")
-            date = split_line[0]
-            temp = float(split_line[1])
-
-            while "2010-10-01" <= date <= "2010-10-31":
-                print(date, "the temp was: ", temp)
-                break
+    print(result)
 
 
-        # temperatures = []
 
 
 if __name__ == '__main__':
