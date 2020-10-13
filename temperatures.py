@@ -1,24 +1,24 @@
 import csv
 
 
-"""def __str__(self):
-    return f"{self.temp}, {self.date} {self.time}"""
+class TemperatureStatistics:
+    def __init__(self, year, month, start_date, end_date):
 
+        self.year = year  # TODO set year(instead of user input) here and in a loop
+        self.month = month
 
-class TemperatureStatistics:  # Här kan man t.ex. räkna ut medeltemperaturen
-    def __init__(self):
-        """self.city = city  # så länge som varje stad har en csv-fil
-        self.date = date
-        self.time = time
-        self.temp = temp
+        self.start_date = start_date
+        self.end_date = end_date
 
-        city, date, time, temp"""
+        if self.month < 10:
+            self.start_date = (self.year + "-" + "0" + str(self.month) + "-" + "01")
+        else:
+            self.start_date = (self.year + "-" + str(self.month) + "-" + "01")
 
-        # self.temps = []
-
-    def add_temp(self, temp):
-        self.temps.append(temp)
-
+        if end_date > 30:
+            self.end_date = (self.year + "-" + str(self.month) + "-" + "31")  # TODO modify 31 days, how reach date in csv-file?
+        else:
+            self.end_date = (self.year + "-" + str(self.month) + "-" + "30")
 
     def avg_temp(self):
         with open("ljusnedal.csv", "r") as file:
@@ -29,82 +29,14 @@ class TemperatureStatistics:  # Här kan man t.ex. räkna ut medeltemperaturen
             sum_temp = 0
             line_count = 0
 
-            month = input("Please choose a month: ")
             for line in text:
                 split_line = line[0].split(";")
                 date = split_line[0]
                 time = split_line[1]
 
-                if month.lower() == "january" or month == "1":
-                    if "2019-01-01" <= date <= "2020-01-31":
-                        temp = float(split_line[2])
-                        sum_temp += temp
-                        line_count += 1
-                        break
-                elif month.lower() == "february" or month == "2":
-                    if "2019-02-01" <= date <= "2020-02-27":
-                        temp = float(split_line[2])
-                        sum_temp += temp
-                        line_count += 1
-                        break
-                elif month.lower() == "march" or month == "3":
-                    if "2019-03-01" <= date <= "2020-03-31":
-                        temp = float(split_line[2])
-                        sum_temp += temp
-                        line_count += 1
-                        break
-                elif month.lower() == "april" or month == "4":
-                    if "2019-04-01" <= date <= "2020-04-30":
-                        temp = float(split_line[2])
-                        sum_temp += temp
-                        line_count += 1
-                        break
-                elif month.lower() == "may" or month == "5":
-                    if "2019-05-01" <= date <= "2020-05-31":
-                        temp = float(split_line[2])
-                        sum_temp += temp
-                        line_count += 1
-                        break
-                elif month.lower() == "june" or month == "6":
-                    if "2019-06-01" <= date <= "2020-06-30":
-                        temp = float(split_line[2])
-                        sum_temp += temp
-                        line_count += 1
-                        break
-                elif month.lower() == "july" or month == "7":
-                    if "2019-07-01" <= date <= "2020-07-31":
-                        temp = float(split_line[2])
-                        sum_temp += temp
-                        line_count += 1
-                        break
-                elif month.lower() == "august" or month == "8":
-                    if "2019-08-01" <= date <= "2020-08-31":
-                        temp = float(split_line[2])
-                        sum_temp += temp
-                        line_count += 1
-                        break
-                elif month.lower() == "september" or month == "9":
-                    if "2019-09-01" <= date <= "2020-09-30":
-                        temp = float(split_line[2])
-                        sum_temp += temp
-                        line_count += 1
-                        break
-                elif month.lower() == "october" or month == "10":
-                    if "2019-10-01" <= date <= "2020-10-31":
-                        temp = float(split_line[2])
-                        sum_temp += temp
-                        line_count += 1
-                        break
-                elif month.lower() == "november" or month == "11":
-                    if "2019-11-01" <= date <= "2020-11-30":
-                        temp = float(split_line[2])
-                        sum_temp += temp
-                        line_count += 1
-                        break
-                elif month.lower() == "december" or month == "12":
-                    if "2019-12-01" <= date <= "2020-12-31":
-                        temp = float(split_line[2])
-                        sum_temp += temp
-                        line_count += 1
-                        break
+                if self.start_date <= date <= self.end_date:
+                    temp = float(split_line[2])
+                    sum_temp += temp
+                    line_count += 1
+                    break
             return round(sum_temp / line_count, 1)
