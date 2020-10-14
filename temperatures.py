@@ -1,25 +1,14 @@
 import csv
 
-"""
-def __str__(self):
-    return f"{self.temp}, {self.date} {self.time}"""
-
 
 class TemperatureStatistics:
-    def __init__(self, year, month, start_date, end_date, accuracy_number):
-        """self.city = city  # så länge som varje stad har en csv-fil
-        self.date = date
-        self.time = time
-        self.temp = temps
-
-        city, date, time, temp"""
-
+    def __init__(self, year, month, start_date, end_date, accuracy_number, city):
         self.year = year
         self.month = month
-
         self.start_date = start_date
         self.end_date = end_date
         self.accuracy_number = accuracy_number
+        self.city = city
 
         for self.year in range(2020 - self.accuracy_number, 2020):
             self.year = (2019 - self.accuracy_number)
@@ -40,9 +29,8 @@ class TemperatureStatistics:
             self.end_date = (str(self.year) + "-" + str(self.month) + "-" + "27")
 
     def avg_temp(self):
-        with open("ljusnedal.csv", "r") as file:
+        with open(self.city.lower() + ".csv", "r") as file:
             text = csv.reader(file)
-
             next(text)
 
             sum_temp = 0
