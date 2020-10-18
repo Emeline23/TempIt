@@ -2,11 +2,21 @@ from temperatures import TemperatureStatistics
 
 
 def main():
-
+    cities = ["Arvika", "Hemavan", "Idre", "Ljusnedal", "Sylarna"]
+    valid = True
     city = input("Please enter a city (Arvika/Hemavan/Idre/Ljusnedal/Sylarna): ")
+    while valid:
+        if city in cities:
+            valid = False
+        else:
+            city = input("Sorry, please enter a one of the available city names: ")
+
     month = int(input("Please enter a month (m): "))
+    # TODO input control for month
 
     accuracy_number = int(input("Please choose accuracy (number of years back - max 10 yrs): "))
+    # TODO input control for years back
+
     start_date = accuracy_number
 
     year = start_date
