@@ -1,14 +1,15 @@
 import csv
 
-
 class TemperatureStatistics:
-    def __init__(self, year, month, start_date, end_date, accuracy_number, city):
+    def __init__(self, year, month, start_date, end_date, accuracy_number, city, time):
         self.year = year
         self.month = month
+
         self.start_date = start_date
         self.end_date = end_date
         self.accuracy_number = accuracy_number
         self.city = city
+        self.time = time
 
         for self.year in range(2020 - self.accuracy_number, 2020):
             self.year = (2019 - self.accuracy_number)
@@ -28,9 +29,15 @@ class TemperatureStatistics:
         else:
             self.end_date = (str(self.year) + "-" + str(self.month) + "-" + "27")
 
+        # self.temps = []
+
+    # def add_temp(self, temp):
+    # self.temps.append(temp)
+
     def avg_temp(self):
         with open(self.city.lower() + ".csv", "r") as file:
             text = csv.reader(file)
+
             next(text)
 
             sum_temp = 0
@@ -41,9 +48,25 @@ class TemperatureStatistics:
                 date = split_line[0]
                 time = split_line[1]
 
-                if self.start_date <= date <= self.end_date:
-                    temp = float(split_line[2])
-                    sum_temp += temp
-                    line_count += 1
-                    break
+                if self.time == "m":
+                    if self.start_date <= date <= self.end_date and "06:00:00" <= time < "12:00:00":
+                        temp = float(split_line[2])
+                        sum_temp += temp
+                        line_count += 1
+                        break
+                elif self.time == "a":
+                    if self.start_date <= date <= self.end_date and "12:00:00" <= time < "23:00:00":
+                        # TODO fix midnight
+                        print("afternoon")
+                        temp = float(split_line[2])
+                        sum_temp += temp
+                        line_count += 1
+                        break
+                else:
+                    if self.start_date <= date <= self.end_date and "00:00:00" <= time < "06:00:00":
+                        print("night")
+                        temp = float(split_line[2])
+                        sum_temp += temp
+                        line_count += 1
+                        break
             return round(sum_temp / line_count, 1)
