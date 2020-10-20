@@ -2,12 +2,11 @@ from temperatures import TemperatureStatistics
 
 
 def city_input():
-    cities = ["Arvika", "Hemavan", "Idre", "Ljusnedal", "Sylarna"]
-    city = input("Please enter a city (Arvika/Hemavan/Idre/Ljusnedal/Sylarna): ")
+    cities = ["arvika", "hemavan", "idre", "ljusnedal", "sylarna"]
+    city = input("Please enter a city (Arvika/Hemavan/Idre/Ljusnedal/Sylarna): ").lower()
     while True:
         if city not in cities:
-            city = input("Sorry, please enter a one of the available city names: ")
-            # TODO lower city name
+            city = input("Sorry, please enter a one of the available city names: ").lower()
         else:
             return city
 
@@ -28,8 +27,13 @@ def time_input():
         try:
             time = input("Please choose time of the day (morning(m)/afternoon(a)/night(n)): ")
             if time == "m" or time == "a" or time == "n":
-                # TODO fix time association
-                return time
+                if time == "m":
+                    time_abbrev = "morning"
+                elif time == "a":
+                    time_abbrev = "afternoon"
+                else:
+                    time_abbrev = "night"
+                return time, time_abbrev
             else:
                 raise ValueError
         except ValueError:
@@ -47,12 +51,43 @@ def accuracy_input():
             print("Number of years must be given with a numeric value between 1 and 10")
 
 
+def current_month(m):
+
+    if m == 1:
+        month = "January"
+    elif m == 2:
+        month = "February"
+    elif m == 3:
+        month = "March"
+    elif m == 4:
+        month = "April"
+    elif m == 5:
+        month = "May"
+    elif m == 6:
+        month = "June"
+    elif m == 7:
+        month = "July"
+    elif m == 8:
+        month = "August"
+    elif m == 9:
+        month = "September"
+    elif m == 10:
+        month = "October"
+    elif m == 11:
+        month = "November"
+    else:
+        month = "December"
+    return month
+
+
 def main():
 
     city = city_input()
 
     month = month_input()
-    time = time_input()
+    chosen_month = current_month(month)
+
+    time, time_abbrev = time_input()
     accuracy_number = accuracy_input()
     start_date = accuracy_number
 
@@ -61,33 +96,8 @@ def main():
 
     city1 = TemperatureStatistics(year, month, start_date, end_date, accuracy_number, city, time)
 
-    if month == 1:
-        month = "January"
-    elif month == 2:
-        month = "February"
-    elif month == 3:
-        month = "March"
-    elif month == 4:
-        month = "April"
-    elif month == 5:
-        month = "May"
-    elif month == 6:
-        month = "June"
-    elif month == 7:
-        month = "July"
-    elif month == 8:
-        month = "August"
-    elif month == 9:
-        month = "September"
-    elif month == 10:
-        month = "October"
-    elif month == 11:
-        month = "November"
-    else:
-        month = "December"
-
     result = city1.avg_temp()
-    print('\n'f"You can expect around {result} {'C°'} in {city} in {month} in the {time}")
+    print('\n'f"You can expect around {result} {'C°'} in {city.capitalize()} in the {time_abbrev} in {chosen_month} ")
 
 
 if __name__ == '__main__':
