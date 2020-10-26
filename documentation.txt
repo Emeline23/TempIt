@@ -1,0 +1,26 @@
+Prioriteringslista (Vad programmet ska kunna göra)
+
+- Kunna räkna ut medeltemperaturen för en månad - KLAR
+- Kunna räkna ut medeltemperaturen för en viss månad för 2 år - KLAR
+- Kunna räkna ut medeltemperaturen för en viss månad för 5 år - KLAR
+- Användaren ska kunna välja månad - KLAR
+- Programmet ska ge felmeddelande vid felaktig användarinput - KLAR
+- Kunna förutsäga temperaturen för en plats - KLAR
+- Kunna förutsäga temperaturen för några platser - KLAR
+- Användaren ska kunna välja en plats - KLAR
+- Användaren ska kunna välja noggrannhet på prognosen(hur hög sannolikhet?) - KLAR
+- Användaren ska kunna välja en tid på dagen - KLAR
+
+- Kunna ta fram min- och maxtemperatur för en viss stad?
+
+Senare i projektet
+- Kunna förutsäga temperatur och väder
+- Kunna förutsäga sannolikheten för nederbörd
+- Hämta temperaturhistorik automatiskt
+
+
+Avgränsningar (Vad ska vara med och inte, vad ska programmet kunna göra och inte)
+
+Programmet ska kunna räkna ut medeltemperaturen för en viss månad under ett eller flera år och på så sätt på en övergripande nivå kunna förutsäga temperaturen för samma månad under nästkommande år.
+Programmet ska däremot ännu inte kunna förutsäga vad för sorts väder det kommer att vara, utöver vilken temperatur.
+Programmets fokus kommer att vara på att förutsäga temperaturen för olika platser i Sverige, men ännu inte för platser i andra länder.

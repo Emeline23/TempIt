@@ -46,19 +46,26 @@ class TemperatureStatistics:
                 time = split_line[1]
 
                 if self.time == "m":
-                    if self.start_date <= date <= self.end_date and "06:00:00" <= time < "12:00:00":
+                    if self.start_date <= date <= self.end_date and "06:00:00" <= time < "12:00:00"\
+                            or time == "06:00:00":
                         temp = float(split_line[2])
                         sum_temp += temp
                         line_count += 1
                         break
                 elif self.time == "a":
-                    if self.start_date <= date <= self.end_date and "12:00:00" <= time <= "23:00:00":
+                    if self.start_date <= date <= self.end_date and "12:00:00" <= time <= "18:00:00"\
+                            or time == "12:00:00":
+                        print(time)
                         temp = float(split_line[2])
                         sum_temp += temp
                         line_count += 1
                         break
                 else:
                     if self.start_date <= date <= self.end_date and "00:00:00" <= time < "06:00:00":
+                        temp = float(split_line[2])
+                        sum_temp += temp
+                        line_count += 1
+                    elif self.start_date <= date <= self.end_date and time >= "18:00:00" or time == "06:00:00":
                         temp = float(split_line[2])
                         sum_temp += temp
                         line_count += 1
